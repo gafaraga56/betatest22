@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, top_sellers, advertisement, advertisement_post,register,login,profile,oktotorp
+from .views import index, top_sellers, advertisement, advertisement_post,register,login,profile,oktotorp,debug
 
 urlpatterns = [
     path('', index, name= "main-page"),
@@ -10,6 +10,6 @@ urlpatterns = [
     path('login',login , name="login"),
     path('profile',profile , name="profile"),
     path('oktotorp',oktotorp,name="oktotorp"),
+    path('debug/',debug)
 
 ]
-
