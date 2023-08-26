@@ -12,4 +12,5 @@ urlpatterns = [
     path('oktotorp',oktotorp,name="oktotorp"),
     path('debug/',debug)
 
+
 ]
