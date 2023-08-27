@@ -11,20 +11,16 @@ class AdvertisementAdmin(admin.ModelAdmin):
     actions = ['delete_description','make_auction_as_true','make_auction_as_false']
     fieldsets = (
         ('general', {
-            'fields': ('title', 'text')
+            'fields': ('title', 'description')
         }),
         ('finance', {
             'fields': ('price', 'auction'),
             'classes': ['collapse']
-        }),
-        ('date', {
-            'fields': ('date',)
-        }),
-    )
+        }))
 
 
 
-    @admin.action(description="Delete the description of the selected objects")
+    @admin.action(description='Delete the description of the selected objects')
     def delete_description(self,request,queryset):
         queryset.update(text='')
 
