@@ -4,19 +4,22 @@ from .models import Advertisement
 
 class AdvertisementAdmin(admin.ModelAdmin):
     list_display = [
-        'id', 'title' ,'authors', 'description', 'price',
-        'created_date', 'auction', 'updated_date',
+        'id', 'title', 'authors', 'description', 'price',
+        'created_date', 'auction', 'updated_date','get_html_image'
     ]
     list_filter = ['auction', 'created_at']
-    actions = ['delete_description','make_auction_as_true','make_auction_as_false']
+    actions = ['delete_description', 'make_auction_as_true', 'make_auction_as_false']
     fieldsets = (
         ('general', {
-            'fields': ('title', 'description')
+            'fields': ('title', 'description', 'authors','image')
         }),
         ('finance', {
             'fields': ('price', 'auction'),
             'classes': ['collapse']
         }))
+
+    class ImagesAdmin(admin.ModelAdmin):
+        list_display = ('image_img', 'product',)
 
 
 
