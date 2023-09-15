@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Advertisement
-# Create your views here.
+from .forms  import AdvertisementForm
+from django.shortcuts import render, redirect
+
+
+
 def index(request):
     advertisment_list = Advertisement.objects.all()
     context = {"advertisements": advertisment_list}
@@ -11,7 +15,16 @@ def top_sellers(request):
 def advertisement(request):
     return render(request, 'advertisement.html')
 def advertisement_post(request):
-    return render(request, 'advertisement-post.html')
+    if request.method == "POST":
+        form = AdvertisementForm(request.POST, request.FILES)
+        if form.is_valid():
+            adv_objecte = Advertisement(**form.cleaned_data)
+            adv_objecte.authors = request.user
+            adv_objecte.save()
+
+    form = AdvertisementForm()
+    context = {'form': form}
+    return render(request, 'advertisement-post.html', context)
 def register(request):
     return render(request, 'register.html')
 def login(request):
@@ -24,6 +37,5 @@ def debug(request):
     obj_list = Advertisement.objects.all()
     print(obj_list)
     return HttpResponse("Yspeshno!")
-
 
 

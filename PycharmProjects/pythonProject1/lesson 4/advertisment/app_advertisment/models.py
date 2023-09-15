@@ -1,13 +1,12 @@
 from django.contrib import admin
 from django.db import models
 from django.utils import timezone, html
-from django.contrib.auth import  get_user_model
-
+from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 class Advertisement(models.Model):
-    image = models.ImageField("Изображение", upload_to="media")
+    image = models.ImageField("Изображение", upload_to="media/",blank=True, null=True)
     title = models.CharField("Заговолок", max_length=180)
     description = models.TextField("Описание")
     authors = models.ForeignKey(to=User, on_delete=models.CASCADE)
@@ -43,7 +42,6 @@ class Advertisement(models.Model):
 
     def __str__(self):
         return f'<Advertisement: Advertisement(id={self.id}, title={self.title})>'
-
 
 
 
