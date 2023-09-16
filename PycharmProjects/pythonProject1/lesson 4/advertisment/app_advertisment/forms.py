@@ -27,20 +27,13 @@ class AdvertisementForm(ModelForm):
      class Meta:
          model = Advertisement
          fields = ("title", "description", "image", "price", "auction")
-
+     def clean_title(self):
+         title = self.cleaned_data['title']
+         if title.startswith('?'):
+             raise ValidationError('Заголовок не может начинаться с вопросительного знака.')
+         return title
      class SlugField(CharField):
          default_validators = [validators.validate_slug]
-     class ContactForm(forms.Form):
-
-
-         def clean_recipients(self):
-             data = self.cleaned_data['recipients']
-             if "fred@example.com" not in data:
-                 raise ValidationError("You have forgotten about Fred!")
-
-             # Always return a value to use as the new cleaned data, even if
-             # this method didn't change it.
-             return data
 
 
 
